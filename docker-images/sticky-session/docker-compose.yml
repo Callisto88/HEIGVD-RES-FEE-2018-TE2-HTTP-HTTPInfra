@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  app1: # Service 1
+    image: res/apache_static # PHP and Apache
+    ports:
+      - 81:80
+    container_name: 'app1'  # Name of the container
+
+  app2: # Service 2
+    image: res/node-http-server
+    ports:
+      - 82:80
+    container_name: 'app2'
+
+  haproxy:  # Haproxy service
+    image: haproxy  # Official HAProxy image
+    ports:
+      - 80:80
+    container_name: 'haproxy' # Name of the container
+    volumes:  # HAProxy configuration volume mount 
+      - './haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro'    
+
