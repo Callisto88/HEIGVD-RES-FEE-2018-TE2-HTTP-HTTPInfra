@@ -268,30 +268,4 @@
   <script src="js/creative.min.js"></script>
 
 </body>
-
-<script type="text/javascript">
-	
-	// Wait for the page to be fully loaded
-	$( document ).ready(function() {
-    setInterval("sendRequest()", 2000);
-  });
-
-  function sendRequest() {
-
-    // Perform Ajax request
-    $.ajax({
-      url: '/api/express',
-      type: 'GET',
-      dataType: 'json',
-      success: function(data){
-        $('#ajax-content').html("Hi ! Let me introduce me, i am : " + data[0].color + " " + data[0].animal + "</br>" + "I was born in " + data[0].birthYear + " and i live in : " + data[0].city);
-      },
-      error: function (xhr, ajaxOptions, thrownError) {
-        var errorMsg = 'Ajax request failed: ' + xhr.responseText;
-        $('#ajax-content').html(errorMsg);
-      }
-    });
-  }
-
-</script>
 </html>
