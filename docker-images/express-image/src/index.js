@@ -5,7 +5,7 @@ const express = require('express')
 const app = express()
 
 app.get('/', function (req, res) {
-  res.send( generateStudents() )
+        res.send( generateAnimals() )
 })
 
 app.get('/test', function(req, res) {
@@ -13,39 +13,28 @@ app.get('/test', function(req, res) {
 })
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+        console.log('Example app listening on port 3000!')
 })
 
 
-function generateStudents() {
+function generateAnimals() {
 
-	var nbStudents = chance.integer({
-		min: 0,
-		max: 10
-	});
+        var nbAnimals = chance.integer({
+                min: 0,
+                max: 10
+        });
 
-	console.log(nbStudents);
-	var students = [];
-	for (var i = 0; i < nbStudents; i++) {
+        console.log(nbAnimals);
+        var animals = [];
+        for (var i = 0; i < nbAnimals; i++) {
 
-		var gender = chance.gender();
-		var birthYear = chance.year({
-			min: 1986,
-			max: 1996
-		});
+                animals.push({
+                        animal: chance.animal(),
+                        pays: chance.country({full: true}),
+                        city: chance.city()
+                });
+        }
 
-		students.push({
-			firstName: chance.first({
-				gender: gender
-			}),
-			lastName: chance.last(),
-			gender: gender,
-			birthday: chance.birthday({
-				year: birthYear
-			})
-		});
-	}
-
-	console.log(students)
-	return students;
+        console.log(animals)
+        return animals;
 }
