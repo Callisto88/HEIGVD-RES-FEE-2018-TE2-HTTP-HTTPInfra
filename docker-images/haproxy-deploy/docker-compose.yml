@@ -19,10 +19,29 @@ services:
    networks:
      - web
 
+  node-express:
+   image: node-express
+   ports:
+     - 3000
+   environment:
+     - SERVICE_PORTS=3000
+   deploy:
+     replicas: 10
+     update_config:
+       parallelism: 2
+       delay: 10s
+     restart_policy:
+       condition: on-failure
+       max_attempts: 3
+       window: 120s
+   networks:
+     - web
+
   proxy:
     image: dockercloud/haproxy
     depends_on:
       - node-http-server-8080
+      - node-express
     environment:
       - BALANCE=leastconn
     volumes:
